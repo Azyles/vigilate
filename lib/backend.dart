@@ -10,8 +10,8 @@ class Backend {
   var city = '';
 
   getCurrentLocation() async {
-    Position position = await Geolocator()
-        .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+
     print('location: ${position.latitude}, ${position.longitude}');
     final coordinates = new Coordinates(position.latitude, position.longitude);
     var addresses =
