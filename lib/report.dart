@@ -26,11 +26,11 @@ class _ReportViewState extends State<ReportView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(backgroundColor: Colors.black,),
       backgroundColor: Colors.black,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      body: ListView(
         children: [
-          SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.02),
           Center(
             child: Text(
               "Add Report",
@@ -100,18 +100,23 @@ class _ReportViewState extends State<ReportView> {
               ),
             ),
           ),
-          SizedBox(height: MediaQuery.of(context).size.height * 0.03),
-          Padding(
-            padding: const EdgeInsets.only(left: 20),
-            child: Text(
-              "Image",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+          ChipsChoice<int>.single(
+            choiceStyle: C2ChoiceStyle(
+                color: Colors.grey[900], brightness: Brightness.dark),
+            choiceActiveStyle: C2ChoiceStyle(
+              color: Colors.redAccent[400],
+              brightness: Brightness.dark,
+            ),
+            value: tag,
+            onChanged: (val) => setState(() => tag = val),
+            choiceItems: C2Choice.listFrom<int, String>(
+              source: options,
+              value: (i, v) => i,
+              label: (i, v) => v,
             ),
           ),
-          SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.01),
           Padding(
             padding: EdgeInsets.only(left: 20),
             child: Row(
@@ -137,23 +142,7 @@ class _ReportViewState extends State<ReportView> {
               ],
             ),
           ),
-          SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-          ChipsChoice<int>.single(
-            choiceStyle: C2ChoiceStyle(
-                color: Colors.grey[900], brightness: Brightness.dark),
-            choiceActiveStyle: C2ChoiceStyle(
-              color: Colors.redAccent[400],
-              brightness: Brightness.dark,
-            ),
-            value: tag,
-            onChanged: (val) => setState(() => tag = val),
-            choiceItems: C2Choice.listFrom<int, String>(
-              source: options,
-              value: (i, v) => i,
-              label: (i, v) => v,
-            ),
-          ),
-          SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.08),
           Center(
             child: GestureDetector(
               onTap: () {
