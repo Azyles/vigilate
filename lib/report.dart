@@ -14,6 +14,7 @@ import 'package:vigilate/backend.dart';
 import 'package:vigilate/report.dart';
 import 'package:vigilate/view.dart';
 
+
 class ReportView extends StatefulWidget {
   @override
   _ReportViewState createState() => _ReportViewState();

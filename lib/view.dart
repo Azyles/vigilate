@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:vigilate/backend.dart';
 
+import 'package:geocoder/geocoder.dart';
+import 'package:geolocator/geolocator.dart';
+
 class ReportListView extends StatefulWidget {
   @override
   ReportListViewState createState() => ReportListViewState();
@@ -75,10 +78,12 @@ class ReportListViewState extends State<ReportListView> {
 
                               var dangerLevel = data['danger level'];
 
+                              var address = data['street'];
+
                               var badgeColor;
 
                               if ((dangerLevel / 10) < 3) {
-                                badgeColor = Colors.yellow;
+                                badgeColor = Colors.yellow[500];
                               } else if ((dangerLevel / 10) >= 3 &&
                                   (dangerLevel / 10) <= 5) {
                                 badgeColor = Colors.orange;
