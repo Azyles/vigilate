@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "782521103155",
+    "firebase_url": "https://vigilate-d8072.firebaseio.com",
+    "project_id": "vigilate-d8072",
+    "storage_bucket": "vigilate-d8072.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:782521103155:android:d67a3b4fc6e4ce69b5c446",
+        "android_client_info": {
+          "package_name": "com.example.vigilate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "782521103155-oikgbdkmrjoe38neer6qasqnv9nm43r0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAk2tuUCYDcoR_2d5haA4qrPi5_-xsvkEI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "782521103155-oikgbdkmrjoe38neer6qasqnv9nm43r0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
