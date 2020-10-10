@@ -59,9 +59,9 @@ class _ReportViewState extends State<ReportView> {
       "danger level": danger,
       "description": description
     }).then((value) => {
-              //Navigator.push(
-              //context, MaterialPageRoute(builder: (context) => HomePage()))
-              //});
+              Navigator.push(
+              context, MaterialPageRoute(builder: (context) => HomePage()))
+             
             });
   }
 
