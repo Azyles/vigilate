@@ -110,6 +110,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   bool extendo = false;
+  
+  bool police = true;
   @override
   void initState() {
     startup();
@@ -137,95 +139,101 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           //police bar
-          Padding(
-            padding: const EdgeInsets.only(top: 50),
-            child: Align(
-              alignment: Alignment.topCenter,
-              child: ClipRect(
-                child: new BackdropFilter(
-                  filter: new ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-                  child: new Container(
-                      width: MediaQuery.of(context).size.width*0.9,
-                      height: 70.0,
-                      decoration:
-                          new BoxDecoration(color: Colors.black.withOpacity(0.5),
-                          borderRadius: BorderRadius.circular(10)
-                          ),
-                      child: Center(
-                        child: new Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Center(
-                                child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => ReportView()),
-                                    );
-                                  },
-                                  child: Container(
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.4,
-                                    height: 40,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: Colors.redAccent[400]),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Center(
-                                        child: Text(
-                                          "PANIC",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 20),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
+          Visibility(
+            visible: police,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 50),
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: ClipRect(
+                  child: new BackdropFilter(
+                    filter: new ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                    child: new Container(
+                        width: MediaQuery.of(context).size.width*0.9,
+                        height: 70.0,
+                        decoration:
+                            new BoxDecoration(color: Colors.black.withOpacity(0.5),
+                            borderRadius: BorderRadius.circular(10)
+                            ),
+                        child: Center(
+                          child: new Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
                               Center(
-                                child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => ReportView()),
-                                    );
-                                  },
-                                  child: Container(
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.4,
-                                    height: 40,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: Colors.deepOrange[400]),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Center(
-                                        child: Text(
-                                          "Dismiss",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 20),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => ReportView()),
+                                      );
+                                    },
+                                    child: Container(
+                                      width:
+                                          MediaQuery.of(context).size.width * 0.4,
+                                      height: 40,
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10),
+                                          color: Colors.redAccent[400]),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Center(
+                                          child: Text(
+                                            "PANIC",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20),
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
-                          ],
-                        ),
-                      )),
+                                Center(
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => ReportView()),
+                                      );
+                                    },
+                                    child: Container(
+                                      width:
+                                          MediaQuery.of(context).size.width * 0.4,
+                                      height: 40,
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10),
+                                          color: Colors.deepOrange[400]),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Center(
+                                          child: Text(
+                                            "Dismiss",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                            ],
+                          ),
+                        )),
+                  ),
                 ),
               ),
             ),
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton.extended(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton(
+
+        child: Icon(Icons.keyboard_arrow_up,color: Colors.white,size: 40,),
         onPressed: () {
           showModalBottomSheet<void>(
             barrierColor: Colors.transparent,
@@ -340,17 +348,9 @@ class _HomePageState extends State<HomePage> {
             },
           );
         },
-        backgroundColor: Colors.black,
+        
+        backgroundColor: Colors.deepOrangeAccent,
         isExtended: extendo,
-        label: extendo
-            ? Text(
-                "Recent Reports",
-                style: TextStyle(color: Colors.white, fontSize: 15),
-              )
-            : Text(
-                "📍",
-                style: TextStyle(color: Colors.white, fontSize: 20),
-              ),
       ),
     );
   }
