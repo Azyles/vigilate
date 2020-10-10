@@ -1,5 +1,6 @@
 import 'package:chips_choice/chips_choice.dart';
 import 'package:flutter/material.dart';
+import 'package:vigilate/main.dart';
 import 'package:vigilate/view.dart';
 
 import 'dart:async';
@@ -32,7 +33,7 @@ class _ReportViewState extends State<ReportView> {
 
   double dangerlevel = 20;
 
-  addReport(city) async {
+  addReport() async {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
 
     var backendInstance = new Backend();
@@ -43,22 +44,25 @@ class _ReportViewState extends State<ReportView> {
 
     var danger = dangerlevel;
 
+    print("MAIN LOCATION " + location[0] + "," + location[1]);
+
     firestore
         .collection("Cities")
         .doc(location[2])
         .collection("Reports")
         .doc()
         .set({
-          "active": true,
-          "latitude": location[0],
-          "longitude": location[1],
-          "time": new DateTime.now(),
-          "danger level": danger,
-          "description": description
-
-        });
-  }
-
+      "active": true,
+      "latitude": location[0],
+      "longitude": location[1],
+      "time": new DateTime.now(),
+      "danger level": danger,
+      "description": description
+    }).then((value) => {
+              //Navigator.push(
+                  //context, MaterialPageRoute(builder: (context) => HomePage()))
+          
+  });
 
   @override
   Widget build(BuildContext context) {
