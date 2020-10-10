@@ -44,7 +44,7 @@ class _ReportViewState extends State<ReportView> {
 
     var danger = dangerlevel;
 
-    print("MAIN LOCATION " + location[0] + "," + location[1]);
+    print("MAIN LOCATION " + location[0].toString() + "," + location[1].toString());
 
     firestore
         .collection("Cities")
@@ -53,8 +53,8 @@ class _ReportViewState extends State<ReportView> {
         .doc()
         .set({
       "active": true,
-      "latitude": location[0],
-      "longitude": location[1],
+      "latitude": location[1],
+      "longitude": location[0],
       "time": new DateTime.now(),
       "danger level": danger,
       "description": description
