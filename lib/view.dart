@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:vigilate/backend.dart';
 
 class ReportListView extends StatefulWidget {
@@ -62,6 +63,12 @@ class ReportListViewState extends State<ReportListView> {
                             physics: BouncingScrollPhysics(),
                             itemCount: snapshot.data.docs.length,
                             itemBuilder: (context, index) {
+                              var data = snapshot.data.docs[index].data();
+
+                              var time = new DateTime(data['time'].seconds);
+
+                              var timeFormatted = new DateFormat.jm('time');
+
                               return Column(
                                 children: [
                                   Center(
@@ -101,7 +108,7 @@ class ReportListViewState extends State<ReportListView> {
                                                               fontWeight:
                                                                   FontWeight
                                                                       .w600)),
-                                                      Text('4:43pm ',
+                                                      Text(timeFormatted.toString(),
                                                           style: TextStyle(
                                                               color:
                                                                   Colors.white,
@@ -128,8 +135,7 @@ class ReportListViewState extends State<ReportListView> {
                                                                   FontWeight
                                                                       .w600)),
                                                       Flexible(
-                                                        child: Text(
-                                                            'I bought ravi a reeses pieces instead of the kitkat he asked for and now he is after me!!',
+                                                        child: Text('',
                                                             style: TextStyle(
                                                                 color: Colors
                                                                     .white,
