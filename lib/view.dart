@@ -45,11 +45,6 @@ class ReportListViewState extends State<ReportListView> {
                                   fontSize: 30,
                                   fontWeight: FontWeight.w300),
                             ),
-                            Container(
-                              width: 30,
-                              height: 50,
-                            ),
-                            Icon(Icons.message_outlined)
                           ],
                         )),
 
@@ -61,7 +56,8 @@ class ReportListViewState extends State<ReportListView> {
 
                         Container(
                           height: MediaQuery.of(context).size.height*0.79,
-                          child:              ListView.builder(
+                          child: ListView.builder(
+                            physics: BouncingScrollPhysics(),
                           itemCount: snapshot.data.docs.length,
                           itemBuilder: (context, index) {
                             return Column(
