@@ -8,8 +8,12 @@ class ReportListView extends StatefulWidget {
 class ReportListViewState extends State<ReportListView> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
+    return Scaffold(
+      body: ListView(
+        children: [
+          
+        ],
+      ),
     );
   }
 }

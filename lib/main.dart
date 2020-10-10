@@ -78,7 +78,8 @@ class _HomePageState extends State<HomePage> {
         icon: BitmapDescriptor.defaultMarker,
         markerId: MarkerId(id),
         position: LatLng(long, lat),
-        infoWindow: InfoWindow(title: "Gun violence reported", snippet: '${time}'),
+        infoWindow:
+            InfoWindow(title: "Gun violence reported", snippet: '${time}'),
       );
       markers[MarkerId(id)] =
           marker; // What I do here is modify the only marker in the Map.
@@ -118,45 +119,111 @@ class _HomePageState extends State<HomePage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true,
-      appBar: AppBar(
-        actions: <Widget>[
-          Padding(
-              padding: EdgeInsets.only(right: 20.0),
-              child: GestureDetector(
-                onTap: () {},
-                child: Icon(
-                  Icons.scatter_plot,
-                  size: 26.0,
-                ),
-              )),
-          Padding(
-              padding: EdgeInsets.only(right: 20.0),
-              child: GestureDetector(
-                onTap: () {},
-                child: Icon(Icons.more_vert),
-              )),
-        ],
-        backgroundColor: Colors.black,
-        title: Text("Vigilate"),
-      ),
       body: Stack(
         children: [
           Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          child: GoogleMap(
-            mapType: MapType.hybrid,
-            initialCameraPosition: CameraPosition(
-              target: const LatLng(-100, 0),
-              zoom: 2,
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: GoogleMap(
+              mapType: MapType.hybrid,
+              initialCameraPosition: CameraPosition(
+                target: const LatLng(-100, 0),
+                zoom: 2,
+              ),
+              onMapCreated: (GoogleMapController controller) {
+                _controller.complete(controller);
+              },
+              markers: Set<Marker>.of(markers.values),
             ),
-            onMapCreated: (GoogleMapController controller) {
-              _controller.complete(controller);
-            },
-            markers: Set<Marker>.of(markers.values),
           ),
-        ),],
+          //police bar
+          Padding(
+            padding: const EdgeInsets.only(top: 50),
+            child: Align(
+              alignment: Alignment.topCenter,
+              child: ClipRect(
+                child: new BackdropFilter(
+                  filter: new ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                  child: new Container(
+                      width: MediaQuery.of(context).size.width*0.9,
+                      height: 70.0,
+                      decoration:
+                          new BoxDecoration(color: Colors.black.withOpacity(0.5),
+                          borderRadius: BorderRadius.circular(10)
+                          ),
+                      child: Center(
+                        child: new Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Center(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ReportView()),
+                                    );
+                                  },
+                                  child: Container(
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.4,
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: Colors.redAccent[400]),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Center(
+                                        child: Text(
+                                          "PANIC",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Center(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ReportView()),
+                                    );
+                                  },
+                                  child: Container(
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.4,
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: Colors.deepOrange[400]),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Center(
+                                        child: Text(
+                                          "Dismiss",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                          ],
+                        ),
+                      )),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
