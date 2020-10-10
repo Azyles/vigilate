@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -42,6 +43,53 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   Completer<GoogleMapController> _controller = Completer();
 
+  Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
+
+  getLivePoints(city) async {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+    var reference = firestore
+        .collection('Cities')
+        .doc(city)
+        .collection("Reports")
+        .where("active", isEqualTo: true);
+    reference.snapshots().listen((querySnapshot) {
+      querySnapshot.docChanges.forEach((point) {
+        print(point.doc.data());
+
+        var data = point.doc.data();
+
+        var longitude = data['longitude'];
+
+        var latitude = data['latitude'];
+
+        var reportTime = data['time'];
+
+        var id = point.doc.id;
+
+        addMarker(longitude, latitude, id, reportTime);
+      });
+    });
+  }
+
+  Future addMarker(long, lat, id, time) async {
+    setState(() {
+      var marker = new Marker(
+        icon: BitmapDescriptor.defaultMarker,
+        markerId: MarkerId(id),
+        position: LatLng(long, lat),
+        infoWindow: InfoWindow(title: "Gun violence reported", snippet: '${time}'),
+      );
+      markers[MarkerId(id)] =
+          marker; // What I do here is modify the only marker in the Map.
+    });
+    markers.forEach((id, marker) {
+      // This is used to see if the marker properties did change, and they did.
+      debugPrint(
+          "Marker: [${marker.position.latitude},${marker.position.longitude}]");
+    });
+  }
+
   Future startup() async {
     Backend backendInstance = new Backend();
 
@@ -57,7 +105,7 @@ class _HomePageState extends State<HomePage> {
     final GoogleMapController controller = await _controller.future;
     controller.animateCamera(CameraUpdate.newCameraPosition(_default));
 
-    await backendInstance.getLivePoints(location[2]);
+    getLivePoints(location[2]);
   }
 
   bool extendo = false;
@@ -104,6 +152,7 @@ class _HomePageState extends State<HomePage> {
           onMapCreated: (GoogleMapController controller) {
             _controller.complete(controller);
           },
+          markers: Set<Marker>.of(markers.values),
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
