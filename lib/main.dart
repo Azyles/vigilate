@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:vigilate/report.dart';
 import 'package:vigilate/view.dart';
 
@@ -27,6 +28,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,9 +40,11 @@ class _HomePageState extends State<HomePage> {
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        child: Image.network(
-          'https://b.basemaps.cartocdn.com/rastertiles/voyager_nolabels/14/4825/6159@2x.png',
-          fit: BoxFit.fitHeight,
+        child: GoogleMap(
+          initialCameraPosition: CameraPosition(
+            target: const LatLng(0, 0),
+            zoom: 2,
+          ),
         ),
       ),
       bottomNavigationBar: BottomAppBar(
