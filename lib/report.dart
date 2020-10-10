@@ -2,6 +2,17 @@ import 'package:chips_choice/chips_choice.dart';
 import 'package:flutter/material.dart';
 import 'package:vigilate/view.dart';
 
+import 'dart:async';
+import 'dart:ui';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:vigilate/backend.dart';
+import 'package:vigilate/report.dart';
+import 'package:vigilate/view.dart';
+
 class ReportView extends StatefulWidget {
   @override
   _ReportViewState createState() => _ReportViewState();
@@ -9,24 +20,34 @@ class ReportView extends StatefulWidget {
 
 class _ReportViewState extends State<ReportView> {
   int tag = 1;
+
+  var descriptionController = TextEditingController();
+
   List<String> options = [
     'Robbery',
-    'Sus Person',
-    'Potential ',
-    'Automotive',
-    'Sports',
-    'Education',
-    'Fashion',
-    'Travel',
-    'Food',
-    'Tech',
-    'Science',
+    'Suspicious Person',
+    'Potential',
+    'Potential',
   ];
+
   double dangerlevel = 20;
+
+  addReport() async {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+    var description = descriptionController.text;
+
+    var danger = dangerlevel;
+
+    
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.black,),
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+      ),
       backgroundColor: Colors.black,
       body: ListView(
         children: [
@@ -44,7 +65,7 @@ class _ReportViewState extends State<ReportView> {
           Padding(
             padding: const EdgeInsets.only(left: 20),
             child: Text(
-              "Concern Level",
+              "Concern Level (0 - 100)",
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,
@@ -87,6 +108,7 @@ class _ReportViewState extends State<ReportView> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
                 child: TextField(
+                  controller: descriptionController,
                   maxLines: 10,
                   decoration: InputDecoration(
                     border: InputBorder.none,
@@ -145,12 +167,9 @@ class _ReportViewState extends State<ReportView> {
           SizedBox(height: MediaQuery.of(context).size.height * 0.08),
           Center(
             child: GestureDetector(
-              onTap: () {
+              onTap: () async {
                 //Add to firebase
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ReportListView()),
-                );
+                await addReport();
               },
               child: Container(
                 width: MediaQuery.of(context).size.width * 0.8,
