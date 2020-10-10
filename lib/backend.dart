@@ -4,6 +4,7 @@ import 'package:geocoder/geocoder.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'main.dart';
 
 class Backend {
   var city = '';
@@ -25,28 +26,5 @@ class Backend {
     return ([position.latitude, position.longitude, first.locality]);
   }
 
-  getLivePoints(city) {
-    FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-    var reference = firestore
-        .collection('Cities')
-        .doc(city)
-        .collection("Reports")
-        .where("active", isEqualTo: true);
-    reference.snapshots().listen((querySnapshot) {
-      querySnapshot.docChanges.forEach((point) {
-        print(point.doc.data());
-
-        var data = point.doc.data();
-
-        var longitude = data['longitude'];
-
-        var latitude = data['latitude'];
-
-        var reportTime = data['time'];
-
-        
-      });
-    });
-  }
 }
