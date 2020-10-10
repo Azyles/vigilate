@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:vigilate/backend.dart';
@@ -30,17 +32,24 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  
-  Future startup() async {
+  Completer<GoogleMapController> _controller = Completer();
 
+  Future startup() async {
     Backend backendInstance = new Backend();
-    
-    backendInstance.getCurrentLocation();
+
+    var location = await backendInstance.getCurrentLocation();
+
+    final CameraPosition _default = CameraPosition(
+      target: LatLng(location[0], location[1]),
+      zoom: 14.4746,
+    );
+
+    final GoogleMapController controller = await _controller.future;
+    controller.animateCamera(CameraUpdate.newCameraPosition(_default));
   }
 
   @override
   void initState() {
-    
     startup();
 
     super.initState();

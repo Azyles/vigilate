@@ -1,6 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:geocoder/geocoder.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class Backend {
   var city = '';
@@ -18,5 +19,7 @@ class Backend {
     print("City : ${first.locality}");
 
     city = first.locality;
+
+    return ([position.latitude, position.latitude]);
   }
 }
