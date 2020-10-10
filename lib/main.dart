@@ -140,7 +140,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.black,
         title: Text("Vigilate"),
       ),
-      body: Stack(
+      body:  Stack(
         children: [
           Container(
           width: MediaQuery.of(context).size.width,
