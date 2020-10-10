@@ -60,6 +60,10 @@ class ReportListViewState extends State<ReportListView> {
                             physics: BouncingScrollPhysics(),
                           itemCount: snapshot.data.docs.length,
                           itemBuilder: (context, index) {
+
+                            print(snapshot.data.docs[index].data());
+
+                            
                             return Column(
                               children: [
                                 Center(
