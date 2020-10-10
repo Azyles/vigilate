@@ -75,6 +75,17 @@ class ReportListViewState extends State<ReportListView> {
 
                               var dangerLevel = data['danger level'];
 
+                              var badgeColor;
+
+                              if ((dangerLevel / 10) < 3) {
+                                badgeColor = Colors.yellow;
+                              } else if ((dangerLevel / 10) >= 3 &&
+                                  (dangerLevel / 10) <= 5) {
+                                badgeColor = Colors.orange;
+                              } else if ((dangerLevel / 10) >= 6) {
+                                badgeColor = Colors.red;
+                              }
+
                               return Column(
                                 children: [
                                   Center(
@@ -165,7 +176,10 @@ class ReportListViewState extends State<ReportListView> {
                                           height: 50,
                                           width: 50,
                                           child: Center(
-                                            child: Text((dangerLevel/10).round().toString(),
+                                            child: Text(
+                                                (dangerLevel / 10)
+                                                    .round()
+                                                    .toString(),
                                                 style: TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 22,
@@ -173,7 +187,7 @@ class ReportListViewState extends State<ReportListView> {
                                                         FontWeight.w700)),
                                           ),
                                           decoration: BoxDecoration(
-                                              color: Colors.red,
+                                              color: badgeColor,
                                               borderRadius:
                                                   BorderRadius.circular(10)),
                                         ),
