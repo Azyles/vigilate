@@ -1,4 +1,6 @@
+import 'package:chips_choice/chips_choice.dart';
 import 'package:flutter/material.dart';
+import 'package:vigilate/view.dart';
 
 class ReportView extends StatefulWidget {
   @override
@@ -6,10 +8,180 @@ class ReportView extends StatefulWidget {
 }
 
 class _ReportViewState extends State<ReportView> {
+  int tag = 1;
+  List<String> options = [
+    'Robbery',
+    'Sus Person',
+    'Potential ',
+    'Automotive',
+    'Sports',
+    'Education',
+    'Fashion',
+    'Travel',
+    'Food',
+    'Tech',
+    'Science',
+  ];
+  double dangerlevel = 20;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+          Center(
+            child: Text(
+              "Add Report",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 35,
+                  fontWeight: FontWeight.w300),
+            ),
+          ),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+          Padding(
+            padding: const EdgeInsets.only(left: 20),
+            child: Text(
+              "Concern Level",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700),
+            ),
+          ),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.005),
+          Slider(
+            activeColor: Colors.deepOrangeAccent[400],
+            inactiveColor: Colors.deepOrange[200],
+            value: dangerlevel,
+            min: 0,
+            max: 100,
+            divisions: 5,
+            label: dangerlevel.round().toString(),
+            onChanged: (double value) {
+              setState(() {
+                dangerlevel = value;
+              });
+            },
+          ),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+          Padding(
+            padding: const EdgeInsets.only(left: 20),
+            child: Text(
+              "Event description",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700),
+            ),
+          ),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+          Center(
+            child: Container(
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey[900], width: 2)),
+              width: MediaQuery.of(context).size.width * 0.9,
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+                child: TextField(
+                  maxLines: 10,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: 'Short and clear description of the event.',
+                    hintStyle: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+          Padding(
+            padding: const EdgeInsets.only(left: 20),
+            child: Text(
+              "Image",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700),
+            ),
+          ),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+          Padding(
+            padding: EdgeInsets.only(left: 20),
+            child: Row(
+              children: [
+                GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.4,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.grey[900]),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                        child: Text(
+                          "Upload Image",
+                          style: TextStyle(color: Colors.white, fontSize: 20),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+          ChipsChoice<int>.single(
+            choiceStyle: C2ChoiceStyle(
+                color: Colors.grey[900], brightness: Brightness.dark),
+            choiceActiveStyle: C2ChoiceStyle(
+              color: Colors.redAccent[400],
+              brightness: Brightness.dark,
+            ),
+            value: tag,
+            onChanged: (val) => setState(() => tag = val),
+            choiceItems: C2Choice.listFrom<int, String>(
+              source: options,
+              value: (i, v) => i,
+              label: (i, v) => v,
+            ),
+          ),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+          Center(
+            child: GestureDetector(
+              onTap: () {
+                //Add to firebase
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ReportListView()),
+                );
+              },
+              child: Container(
+                width: MediaQuery.of(context).size.width * 0.8,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.redAccent[400]),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Center(
+                    child: Text(
+                      "Report Activity",
+                      style: TextStyle(color: Colors.white, fontSize: 25),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
