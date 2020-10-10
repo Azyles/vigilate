@@ -144,7 +144,7 @@ class _HomePageState extends State<HomePage> {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: GoogleMap(
-          mapType: MapType.normal,
+          mapType: MapType.hybrid,
           initialCameraPosition: CameraPosition(
             target: const LatLng(-100, 0),
             zoom: 2,
