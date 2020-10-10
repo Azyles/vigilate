@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Center(
                     child: Text(
-                  "Activity",
+                  "Dashboard",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 25,
@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage> {
                         padding: const EdgeInsets.all(8.0),
                         child: Center(
                           child: Text(
-                            "Report Activity",
+                            "Report",
                             style: TextStyle(color: Colors.white, fontSize: 25),
                           ),
                         ),
@@ -109,7 +109,7 @@ class _HomePageState extends State<HomePage> {
                         padding: const EdgeInsets.all(8.0),
                         child: Center(
                           child: Text(
-                            "Report Activity",
+                            "Recent Reports",
                             style: TextStyle(color: Colors.white, fontSize: 25),
                           ),
                         ),
