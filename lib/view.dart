@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:jiffy/jiffy.dart';
 import 'package:vigilate/backend.dart';
 
 class ReportListView extends StatefulWidget {
@@ -58,16 +58,22 @@ class ReportListViewState extends State<ReportListView> {
                             height: MediaQuery.of(context).size.height * 0.05),
 
                         Container(
-                          height: MediaQuery.of(context).size.height * 0.785,
+                          height: MediaQuery.of(context).size.height * 0.735,
                           child: ListView.builder(
                             physics: BouncingScrollPhysics(),
                             itemCount: snapshot.data.docs.length,
                             itemBuilder: (context, index) {
                               var data = snapshot.data.docs[index].data();
 
-                              var time = new DateTime(data['time'].seconds);
+                              var time = data['time'].toDate();
 
-                              var timeFormatted = new DateFormat.jm('time');
+                              print(Jiffy(time).yMMMMEEEEdjm);
+
+                              var timeFormatted = Jiffy(time).fromNow();
+
+                              var description = data['description'];
+
+                              var dangerLevel = data['danger level'];
 
                               return Column(
                                 children: [
@@ -108,7 +114,9 @@ class ReportListViewState extends State<ReportListView> {
                                                               fontWeight:
                                                                   FontWeight
                                                                       .w600)),
-                                                      Text(timeFormatted.toString(),
+                                                      Text(
+                                                          timeFormatted
+                                                              .toString(),
                                                           style: TextStyle(
                                                               color:
                                                                   Colors.white,
@@ -135,7 +143,9 @@ class ReportListViewState extends State<ReportListView> {
                                                                   FontWeight
                                                                       .w600)),
                                                       Flexible(
-                                                        child: Text('',
+                                                        child: Text(description,
+                                                            textAlign:
+                                                                TextAlign.left,
                                                             style: TextStyle(
                                                                 color: Colors
                                                                     .white,
@@ -155,7 +165,7 @@ class ReportListViewState extends State<ReportListView> {
                                           height: 50,
                                           width: 50,
                                           child: Center(
-                                            child: Text('7',
+                                            child: Text((dangerLevel/10).round().toString(),
                                                 style: TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 22,
