@@ -20,6 +20,11 @@ class Backend {
 
     city = first.locality;
 
-    return ([position.latitude, position.longitude]);
+    return ([position.latitude, position.longitude, first.locality]);
+  }
+
+
+  getLivePoints(city){
+    
   }
 }

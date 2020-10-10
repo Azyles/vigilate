@@ -48,6 +48,8 @@ class _HomePageState extends State<HomePage> {
 
     final GoogleMapController controller = await _controller.future;
     controller.animateCamera(CameraUpdate.newCameraPosition(_default));
+
+    await backendInstance.getLivePoints(location[2]);
   }
 
   @override
