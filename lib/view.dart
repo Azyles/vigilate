@@ -27,12 +27,39 @@ class ReportListViewState extends State<ReportListView> {
               ),
               Container(
                 width: 30,
+                height: 50,
               ),
               Icon(Icons.message_outlined)
             ],
           )),
 
           //End of Title Text and Icon ///
+
+          Container(
+            height: 40,
+          ),
+
+          Container(
+            width: MediaQuery.of(context).size.width * 0.4,
+            height: 150,
+            decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Colors.redAccent[400]),
+          ),
+
+          Container(
+            height: 40,
+          ),
+
+          Container(
+            width: MediaQuery.of(context).size.width * 0.4,
+            height: 150,
+            decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Colors.redAccent[400]),
+          ),
+
+
 
           
 
