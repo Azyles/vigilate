@@ -39,6 +39,12 @@ class Backend {
 
         var data = point.doc.data();
 
+        var longitude = data['longitude'];
+
+        var latitude = data['latitude'];
+
+        var reportTime = data['time'];
+
         
       });
     });
