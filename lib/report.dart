@@ -32,15 +32,33 @@ class _ReportViewState extends State<ReportView> {
 
   double dangerlevel = 20;
 
-  addReport() async {
+  addReport(city) async {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+    var backendInstance = new Backend();
+
+    var location = await backendInstance.getCurrentLocation();
 
     var description = descriptionController.text;
 
     var danger = dangerlevel;
 
-    
+    firestore
+        .collection("Cities")
+        .doc(location[2])
+        .collection("Reports")
+        .doc()
+        .set({
+          "active": true,
+          "latitude": location[0],
+          "longitude": location[1],
+          "time": new DateTime.now(),
+          "danger level": danger,
+          "description": description
+
+        });
   }
+
 
   @override
   Widget build(BuildContext context) {
