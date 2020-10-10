@@ -39,12 +39,14 @@ class ReportListViewState extends State<ReportListView> {
             height: 40,
           ),
 
-          Container(
-            width: MediaQuery.of(context).size.width * 0.4,
-            height: 150,
+         Container(
+            width: 50,
+            height: 160,
             decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: Colors.redAccent[400]),
+            color: Colors.white.withOpacity(0.2),
+            
+            ),
           ),
 
           Container(
@@ -52,11 +54,13 @@ class ReportListViewState extends State<ReportListView> {
           ),
 
           Container(
-            width: MediaQuery.of(context).size.width * 0.4,
-            height: 150,
+            width: 50,
+            height: 160,
             decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: Colors.redAccent[400]),
+            color: Colors.white.withOpacity(0.2),
+            
+            ),
           ),
 
 
