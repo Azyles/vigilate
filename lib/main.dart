@@ -140,20 +140,23 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.black,
         title: Text("Vigilate"),
       ),
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        child: GoogleMap(
-          mapType: MapType.normal,
-          initialCameraPosition: CameraPosition(
-            target: const LatLng(-100, 0),
-            zoom: 2,
+      body: Stack(
+        children: [
+          Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          child: GoogleMap(
+            mapType: MapType.hybrid,
+            initialCameraPosition: CameraPosition(
+              target: const LatLng(-100, 0),
+              zoom: 2,
+            ),
+            onMapCreated: (GoogleMapController controller) {
+              _controller.complete(controller);
+            },
+            markers: Set<Marker>.of(markers.values),
           ),
-          onMapCreated: (GoogleMapController controller) {
-            _controller.complete(controller);
-          },
-          markers: Set<Marker>.of(markers.values),
-        ),
+        ),],
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
