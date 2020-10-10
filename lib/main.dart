@@ -136,6 +136,7 @@ class _HomePageState extends State<HomePage> {
               markers: Set<Marker>.of(markers.values),
             ),
           ),
+          //police bar
           Padding(
             padding: const EdgeInsets.only(top: 50),
             child: Align(
