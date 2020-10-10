@@ -8,6 +8,7 @@ class Backend {
     LocationData currentLocation;
 
     LocationData myLocation;
+
       String error;
       Location location = new Location();
       try {
@@ -24,13 +25,17 @@ class Backend {
         myLocation = null;
       }
       currentLocation = myLocation;
+
+
       final coordinates = new Coordinates(
           myLocation.latitude, myLocation.longitude);
+
       var addresses = await Geocoder.local.findAddressesFromCoordinates(
           coordinates);
+
       var first = addresses.first;
       print(' ${first.locality}, ${first.adminArea},${first.subLocality}, ${first.subAdminArea},${first.addressLine}, ${first.featureName},${first.thoroughfare}, ${first.subThoroughfare}');
-      return first;
+
 
 
   }

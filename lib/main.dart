@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:vigilate/backend.dart';
 import 'package:vigilate/report.dart';
 import 'package:vigilate/view.dart';
+import '';
 
 void main() {
   runApp(MyApp());
@@ -28,14 +30,22 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  
+  Future startup() async {
+
+    Backend backendInstance = new Backend();
+    
+    backendInstance.getCurrentLocation();
+  }
 
   @override
   void initState() {
-    // TODO: implement initState
+    
+    startup();
+
     super.initState();
   }
 
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -108,9 +118,10 @@ class _HomePageState extends State<HomePage> {
                   child: GestureDetector(
                     onTap: () {
                       Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ReportListView()),
-            );
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ReportListView()),
+                      );
                     },
                     child: Container(
                       width: MediaQuery.of(context).size.width * 0.8,
