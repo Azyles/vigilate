@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
 
   Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
 
-  getLivePoints(city) async{
+  getLivePoints(city) async {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
 
     var reference = firestore
@@ -50,6 +50,7 @@ class _HomePageState extends State<HomePage> {
         .collection("Reports")
         .where("active", isEqualTo: true);
     reference.snapshots().listen((querySnapshot) {
+        markers.clear();
       querySnapshot.docChanges.forEach((point) {
         print(point.doc.data());
 
@@ -76,12 +77,11 @@ class _HomePageState extends State<HomePage> {
         position: LatLng(long, lat),
         infoWindow: InfoWindow(title: "Incident", snippet: '*'),
       );
-      markers[id] =
+      markers[MarkerId(id)] =
           marker; // What I do here is modify the only marker in the Map.
     });
     markers.forEach((id, marker) {
       // This is used to see if the marker properties did change, and they did.
-      debugPrint("MarkerId: $id");
       debugPrint(
           "Marker: [${marker.position.latitude},${marker.position.longitude}]");
     });
