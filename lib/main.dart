@@ -50,7 +50,6 @@ class _HomePageState extends State<HomePage> {
         .collection("Reports")
         .where("active", isEqualTo: true);
     reference.snapshots().listen((querySnapshot) {
-        markers.clear();
       querySnapshot.docChanges.forEach((point) {
         print(point.doc.data());
 
@@ -64,18 +63,18 @@ class _HomePageState extends State<HomePage> {
 
         var id = point.doc.id;
 
-        addMarker(longitude, latitude, id);
+        addMarker(longitude, latitude, id, reportTime);
       });
     });
   }
 
-  Future addMarker(long, lat, id) async {
+  Future addMarker(long, lat, id, time) async {
     setState(() {
       var marker = new Marker(
         icon: BitmapDescriptor.defaultMarker,
         markerId: MarkerId(id),
         position: LatLng(long, lat),
-        infoWindow: InfoWindow(title: "Incident", snippet: '*'),
+        infoWindow: InfoWindow(title: "Gun violence reported", snippet: '${time}'),
       );
       markers[MarkerId(id)] =
           marker; // What I do here is modify the only marker in the Map.
