@@ -39,22 +39,36 @@ class ReportListViewState extends State<ReportListView> {
             height: 40,
           ),
 
-         Container(
-            width: 50,
+         Center(
+            child: Container(
+            width: MediaQuery.of(context).size.width * 0.9,
             height: 160,
             decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: Colors.white.withOpacity(0.2),
             
             ),
+
+            child: Column(
+              children: [
+                Text(
+                  'Time: ',
+                ),
+                Text(
+                  'Situation: '
+                )
+              ],
+            ),
           ),
+         ),
 
           Container(
             height: 40,
           ),
 
-          Container(
-            width: 50,
+         Center(
+            child: Container(
+            width: MediaQuery.of(context).size.width * 0.9,
             height: 160,
             decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
@@ -62,6 +76,7 @@ class ReportListViewState extends State<ReportListView> {
             
             ),
           ),
+         ),
 
 
 
