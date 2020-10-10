@@ -13,6 +13,9 @@ class ReportListViewState extends State<ReportListView> {
     var backendInstance = new Backend();
 
     return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.black,
+        ),
         body: FutureBuilder(
             future: backendInstance.getCurrentLocation(),
             builder: (BuildContext context, snapshot) {
@@ -33,7 +36,7 @@ class ReportListViewState extends State<ReportListView> {
                     return Column(
                       children: [
                         SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.05),
+                            height: MediaQuery.of(context).size.height * 0.02),
                         Center(
                             child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -50,48 +53,125 @@ class ReportListViewState extends State<ReportListView> {
 
                         //End of Title Text and Icon ///
 
-                        Container(
-                          height: 40,
-                        ),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.05),
 
                         Container(
-                          height: MediaQuery.of(context).size.height*0.79,
+                          height: MediaQuery.of(context).size.height * 0.785,
                           child: ListView.builder(
                             physics: BouncingScrollPhysics(),
-                          itemCount: snapshot.data.docs.length,
-                          itemBuilder: (context, index) {
-                            return Column(
-                              children: [
-                                Center(
-                              child: Container(
-                                width: MediaQuery.of(context).size.width * 0.9,
-                                height: 160,
-                               
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.white.withOpacity(0.2),
-                                ),
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      'Time: ',
+                            itemCount: snapshot.data.docs.length,
+                            itemBuilder: (context, index) {
+                              return Column(
+                                children: [
+                                  Center(
+                                    child: Stack(
+                                      alignment: Alignment.topRight,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              right: 10, top: 10),
+                                          child: Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.9,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              color:
+                                                  Colors.white.withOpacity(0.1),
+                                            ),
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 20,
+                                                  left: 20,
+                                                  bottom: 20,
+                                                  right: 20),
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      Text('Time: ',
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 20,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600)),
+                                                      Text('4:43pm ',
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 20,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w300)),
+                                                    ],
+                                                  ),
+                                                  SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text('Situation: ',
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 20,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600)),
+                                                      Flexible(
+                                                        child: Text(
+                                                            'I bought ravi a reeses pieces instead of the kitkat he asked for and now he is after me!!',
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 20,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w300)),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Container(
+                                          height: 50,
+                                          width: 50,
+                                          child: Center(
+                                            child: Text('7',
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 22,
+                                                    fontWeight:
+                                                        FontWeight.w700)),
+                                          ),
+                                          decoration: BoxDecoration(
+                                              color: Colors.red,
+                                              borderRadius:
+                                                  BorderRadius.circular(10)),
+                                        ),
+                                      ],
                                     ),
-                                    Text('Situation: ')
-                                  ],
-                                ),
-                              ),
-                            ),
-
-                            SizedBox(
-                              height: 10,
-                            ),
-                              ],
-                            );
-                          },
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                ],
+                              );
+                            },
+                          ),
                         ),
-                        ),
-
-           
                       ],
                     );
                   });
