@@ -9,7 +9,7 @@ class Backend {
   getCurrentLocation() async {
     Position position = await Geolocator()
         .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-    print('location: ${position.latitude}');
+    print('location: ${position.latitude}, ${position.longitude}');
     final coordinates = new Coordinates(position.latitude, position.longitude);
     var addresses =
         await Geocoder.local.findAddressesFromCoordinates(coordinates);
@@ -20,6 +20,6 @@ class Backend {
 
     city = first.locality;
 
-    return ([position.latitude, position.latitude]);
+    return ([position.latitude, position.longitude]);
   }
 }

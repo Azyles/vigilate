@@ -39,9 +39,11 @@ class _HomePageState extends State<HomePage> {
 
     var location = await backendInstance.getCurrentLocation();
 
+    print(location);
+
     final CameraPosition _default = CameraPosition(
       target: LatLng(location[0], location[1]),
-      zoom: 14.4746,
+      zoom: 12,
     );
 
     final GoogleMapController controller = await _controller.future;
@@ -68,9 +70,12 @@ class _HomePageState extends State<HomePage> {
         child: GoogleMap(
           mapType: MapType.normal,
           initialCameraPosition: CameraPosition(
-            target: const LatLng(0, 0),
+            target: const LatLng(-100, 0),
             zoom: 2,
           ),
+          onMapCreated: (GoogleMapController controller) {
+            _controller.complete(controller);
+          },
         ),
       ),
       bottomNavigationBar: BottomAppBar(
