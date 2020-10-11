@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:jiffy/jiffy.dart';
 import 'package:vigilate/backend.dart';
 import 'package:vigilate/police.dart';
 import 'package:vigilate/report.dart';
@@ -80,7 +81,7 @@ class _HomePageState extends State<HomePage> {
         markerId: MarkerId(id),
         position: LatLng(long, lat),
         infoWindow:
-            InfoWindow(title: "Gun violence reported", snippet: '${time}'),
+            InfoWindow(title: "Gun violence reported", snippet:  Jiffy(time.toDate()).fromNow()),
       );
       markers[MarkerId(id)] =
           marker; // What I do here is modify the only marker in the Map.
