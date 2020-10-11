@@ -88,6 +88,8 @@ class Backend {
 
         var description = data['description'];
 
+        var street = data['street'];
+
         if (lastAlertTimeStamp != reportTime) {
         Torch.turnOn();
 
@@ -124,7 +126,7 @@ class Backend {
                                         height: 10,
                                       ),
                                       Text(
-                                        "New incident reported",
+                                        "Incident reported by Police",
                                         style: TextStyle(fontSize: 24),
                                       ),
                                       SizedBox(
@@ -135,7 +137,7 @@ class Backend {
                                             Jiffy(reportTime).fromNow() +
                                             "\n" +
                                             "Description: " +
-                                            description,
+                                            description + "\n" + "Street: " + street,
                                         style: TextStyle(fontSize: 18),
                                       )
                                     ],
