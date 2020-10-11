@@ -30,6 +30,7 @@ class _PoliceViewState extends State<PoliceView> {
       "latitude": location[1],
       "description": descriptionController.text,
       "street": location[3],
+      "location": GeoPoint(location[0], location[1]),
       "time": new DateTime.now()
     }).then((value) {
       Navigator.push(

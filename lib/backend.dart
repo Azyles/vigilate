@@ -34,11 +34,30 @@ class Backend {
   getLiveAlerts(city) async {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
 
+    var location = await getCurrentLocation();
+
+    var latitude = location[0];
+    var longitude = location[1];
+
+        // ~1 mile of lat and lon in degrees
+    var lat = 0.0144927536231884;
+    var lon = 0.0181818181818182;
+
+    var lowerLat = latitude - (lat * 3);
+    var lowerLon = longitude - (lon * 3);
+
+    var greaterLat = latitude + (lat * 3);
+    var greaterLon = longitude + (lon * 3);
+
+
+    var lesserGeopoint = GeoPoint(lowerLat, lowerLon);
+    var greaterGeopoint = GeoPoint(greaterLat, greaterLon);
+
     var reference = firestore
         .collection('Cities')
         .doc(city)
         .collection("Reports")
-        .where("active", isEqualTo: true);
+        .where("location", isGreaterThan: lesserGeopoint).where("location", isLessThan: greaterGeopoint);
     reference.snapshots().listen((querySnapshot) {
       querySnapshot.docChanges.forEach((point) {
         print(point.doc.data());
@@ -55,7 +74,8 @@ class Backend {
 
         var description = data['description'];
 
-        
+
+
       });
     });
   }
