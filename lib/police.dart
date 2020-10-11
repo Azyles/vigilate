@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:vigilate/backend.dart';
@@ -33,8 +35,21 @@ class _PoliceViewState extends State<PoliceView> {
       "location": GeoPoint(location[0], location[1]),
       "time": new DateTime.now()
     }).then((value) {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => HomePage()));
+
+      Timer _timer;
+
+      _timer = new Timer(const Duration(milliseconds: 1000), () {
+        firestore
+            .collection("Cities")
+            .doc(location[2])
+            .collection("Alerts")
+            .doc()
+            .delete()
+            .then((value) {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => HomePage()));
+        });
+      });
     });
   }
 

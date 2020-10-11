@@ -56,7 +56,7 @@ class Backend {
     var greaterGeopoint = GeoPoint(greaterLat, greaterLon);
 
     var reference =
-        firestore.collection('Cities').doc(city).collection("Alerts").where("location", isGreaterThan: lesserGeopoint).where("location", isLessThan: greaterGeopoint);
+        firestore.collection('Cities').doc(city).collection("Alerts");
 
     reference.snapshots().listen((querySnapshot) {
       querySnapshot.docChanges.forEach((point) async {
