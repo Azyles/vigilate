@@ -68,10 +68,9 @@ class Backend {
 
            _assetsAudioPlayer = AssetsAudioPlayer();
           _assetsAudioPlayer.open(
-            AssetsAudio(
-              asset: "ring.mp3",
-              folder: "assets/",
-            ),
+            Audio("assets/ring.mp3"),
+            autoStart: true,
+            showNotification: false,
           );
 
          _assetsAudioPlayer.playOrPause();
