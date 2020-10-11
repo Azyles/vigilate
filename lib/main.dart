@@ -6,6 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:vigilate/backend.dart';
+import 'package:vigilate/police.dart';
 import 'package:vigilate/report.dart';
 import 'package:vigilate/view.dart';
 
@@ -166,10 +167,18 @@ class _HomePageState extends State<HomePage> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => ReportView()),
+                                            builder: (context) => PoliceView()),
                                       );
                                     },
-                                    child: Container(
+                                    child: GestureDetector(
+                                       onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => PoliceView()),
+                                      );
+                                    },
+                                      child:  Container(
                                       width:
                                           MediaQuery.of(context).size.width * 0.4,
                                       height: 40,
@@ -188,6 +197,7 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                       ),
                                     ),
+                                    )
                                   ),
                                 ),
                                 Center(
@@ -196,7 +206,7 @@ class _HomePageState extends State<HomePage> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => ReportView()),
+                                            builder: (context) => PoliceView()),
                                       );
                                     },
                                     child: Container(
