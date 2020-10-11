@@ -65,7 +65,6 @@ class Backend {
 
     reference.snapshots().listen((querySnapshot) {
       querySnapshot.docChanges.forEach((point) async {
-        print("NEW POLICE ALERT" + point.doc.data().toString());
 
         _assetsAudioPlayer = AssetsAudioPlayer();
         _assetsAudioPlayer.open(
