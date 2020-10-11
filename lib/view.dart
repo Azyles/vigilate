@@ -142,6 +142,38 @@ class ReportListViewState extends State<ReportListView> {
                                                                       .w300)),
                                                     ],
                                                   ),
+
+                                                  SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text('Street: ',
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 20,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600)),
+                                                      Flexible(
+                                                        child: Text(address,
+                                                            textAlign:
+                                                                TextAlign.left,
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 20,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w300)),
+                                                      ),
+                                                    ],
+                                                  ),
+
                                                   SizedBox(
                                                     height: 10,
                                                   ),

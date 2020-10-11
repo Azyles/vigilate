@@ -58,7 +58,8 @@ class _ReportViewState extends State<ReportView> {
       "longitude": location[0],
       "time": new DateTime.now(),
       "danger level": danger,
-      "description": description
+      "description": description,
+      "street": location[3]
     }).then((value) => {
               Navigator.push(
               context, MaterialPageRoute(builder: (context) => HomePage()))

@@ -24,10 +24,17 @@ class Backend {
 
     city = first.locality;
 
-    return ([position.latitude, position.longitude, first.locality]);
+    var location = first.addressLine;
+
+    var street = location.substring(0, location.indexOf(','));
+
+    return ([
+      position.latitude,
+      position.longitude,
+      first.locality,
+      street
+    ]);
   }
 
-  getRecentReports(city) async{
-    
-  }
+  getRecentReports(city) async {}
 }
