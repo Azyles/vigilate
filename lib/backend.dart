@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flashlight/flashlight.dart';
 import 'package:geocoder/geocoder.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter/material.dart';
@@ -62,6 +61,8 @@ class Backend {
 
     AssetsAudioPlayer _assetsAudioPlayer;
 
+    var lastAlertTimeStamp;
+
     reference.snapshots().listen((querySnapshot) {
       querySnapshot.docChanges.forEach((point) async {
         print("NEW POLICE ALERT" + point.doc.data().toString());
@@ -75,8 +76,6 @@ class Backend {
 
         _assetsAudioPlayer.playOrPause();
 
-        
-
         var data = point.doc.data();
 
         //var long = data['longitude'];
@@ -89,6 +88,7 @@ class Backend {
 
         var description = data['description'];
 
+        if (lastAlertTimeStamp != reportTime) {
         Torch.turnOn();
 
         showDialog(
@@ -170,16 +170,13 @@ class Backend {
               ),
             ),
           ),
-        ).then((exit) => {
-              if (exit){
-                
-                
-                }
-              else
-                {
-                  // user pressed No button
-                }
-            });
+        ).then((exit) => {Torch.turnOff()});
+
+          lastAlertTimeStamp = reportTime;
+
+        }
+
+
       });
     });
   }
