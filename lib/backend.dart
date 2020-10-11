@@ -59,7 +59,7 @@ class Backend {
         firestore.collection('Cities').doc(city).collection("Alerts");
 
     reference.snapshots().listen((querySnapshot) {
-      querySnapshot.docChanges.forEach((point) {
+      querySnapshot.docChanges.forEach((point) async {
         print("NEW POLICE ALERT" + point.doc.data().toString());
 
         var data = point.doc.data();
@@ -74,12 +74,17 @@ class Backend {
 
         var description = data['description'];
 
-
         final assetsAudioPlayer = AssetsAudioPlayer();
 
-        assetsAudioPlayer.open(
-          Audio("ring.mp3"),
+        try {
+                await assetsAudioPlayer.open(
+                Audio("ring.mp3"),
         );
+        } catch (t) {
+        //mp3 unreachable
+        }
+
+
       });
     });
   }
