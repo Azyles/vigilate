@@ -37,6 +37,7 @@ class _PoliceViewState extends State<PoliceView> {
       "location": GeoPoint(location[0], location[1]),
       "time": new DateTime.now()
     }).then((value) {
+      print("CREATED");
 
       Future.delayed(Duration(seconds: 2)).then((value) {
         firestore
@@ -46,6 +47,7 @@ class _PoliceViewState extends State<PoliceView> {
             .doc(id)
             .delete()
             .then((value) {
+              print("DELETED");
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => HomePage()));
         });
