@@ -18,7 +18,7 @@ class _PoliceViewState extends State<PoliceView> {
 
     var backendInstance = new Backend();
 
-    var location = backendInstance.getCurrentLocation();
+    var location = await backendInstance.getCurrentLocation();
 
     firestore
         .collection("Cities")
