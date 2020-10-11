@@ -56,7 +56,7 @@ class Backend {
     var greaterGeopoint = GeoPoint(greaterLat, greaterLon);
 
     var reference =
-        firestore.collection('Cities').doc(city).collection("Alerts");
+        firestore.collection('Cities').doc(city).collection("Alerts").where("location", isGreaterThan: lesserGeopoint).where("location", isLessThan: greaterGeopoint);
 
     reference.snapshots().listen((querySnapshot) {
       querySnapshot.docChanges.forEach((point) async {
@@ -74,16 +74,7 @@ class Backend {
 
         var description = data['description'];
 
-        final assetsAudioPlayer = AssetsAudioPlayer();
-
-        try {
-                await assetsAudioPlayer.open(
-                Audio("ring.mp3"),
-        );
-        } catch (t) {
-        //mp3 unreachable
-        }
-
+      
 
       });
     });
