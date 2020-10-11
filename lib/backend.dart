@@ -1,11 +1,7 @@
-import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/services.dart';
 import 'package:geocoder/geocoder.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'main.dart';
 
 class Backend {
   var city = '';
@@ -37,23 +33,23 @@ class Backend {
 
     print("GEtting live alerts");
 
-    var location = await getCurrentLocation();
+    //var location = await getCurrentLocation();
 
-    var latitude = location[0];
-    var longitude = location[1];
+    //var latitude = location[0];
+    //var longitude = location[1];
 
     // ~1 mile of lat and lon in degrees
-    var lat = 0.0144927536231884;
-    var lon = 0.0181818181818182;
+    //var lat = 0.0144927536231884;
+   //var lon = 0.0181818181818182;
 
-    var lowerLat = latitude - (lat * 3);
-    var lowerLon = longitude - (lon * 3);
+    //var lowerLat = latitude - (lat * 3);
+    //var lowerLon = longitude - (lon * 3);
 
-    var greaterLat = latitude + (lat * 3);
-    var greaterLon = longitude + (lon * 3);
+    //var greaterLat = latitude + (lat * 3);
+    //var greaterLon = longitude + (lon * 3);
 
-    var lesserGeopoint = GeoPoint(lowerLat, lowerLon);
-    var greaterGeopoint = GeoPoint(greaterLat, greaterLon);
+    //var lesserGeopoint = GeoPoint(lowerLat, lowerLon);
+    //var greaterGeopoint = GeoPoint(greaterLat, greaterLon);
 
     var reference =
         firestore.collection('Cities').doc(city).collection("Alerts");

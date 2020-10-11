@@ -1,19 +1,11 @@
 import 'package:chips_choice/chips_choice.dart';
 import 'package:flutter/material.dart';
 import 'package:vigilate/main.dart';
-import 'package:vigilate/view.dart';
 
-import 'dart:async';
 import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:vigilate/backend.dart';
-import 'package:vigilate/report.dart';
-import 'package:vigilate/view.dart';
-
 
 class ReportView extends StatefulWidget {
   @override

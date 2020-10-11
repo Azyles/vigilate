@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:vigilate/backend.dart';
 
-import 'package:geocoder/geocoder.dart';
-import 'package:geolocator/geolocator.dart';
-
 class ReportListView extends StatefulWidget {
   @override
   ReportListViewState createState() => ReportListViewState();
