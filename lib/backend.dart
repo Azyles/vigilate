@@ -1,3 +1,4 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:geocoder/geocoder.dart';
@@ -72,6 +73,13 @@ class Backend {
         var id = point.doc.id;
 
         var description = data['description'];
+
+
+        final assetsAudioPlayer = AssetsAudioPlayer();
+
+        assetsAudioPlayer.open(
+          Audio("ring.mp3"),
+        );
       });
     });
   }
