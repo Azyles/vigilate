@@ -60,7 +60,7 @@ class Backend {
         .where("location", isGreaterThan: lesserGeopoint).where("location", isLessThan: greaterGeopoint);
     reference.snapshots().listen((querySnapshot) {
       querySnapshot.docChanges.forEach((point) {
-        print(point.doc.data());
+        print("NEW POLICE ALERT" + point.doc.data().toString());
 
         var data = point.doc.data();
 
