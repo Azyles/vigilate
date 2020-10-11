@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:vigilate/backend.dart';
+import 'package:vigilate/main.dart';
 
 class PoliceView extends StatefulWidget {
   @override
@@ -28,7 +29,11 @@ class _PoliceViewState extends State<PoliceView> {
       "longitude": location[0],
       "latitude": location[1],
       "description": descriptionController.text,
+      "street": location[3],
       "time": new DateTime.now()
+    }).then((value) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => HomePage()));
     });
   }
 
@@ -53,6 +58,9 @@ class _PoliceViewState extends State<PoliceView> {
                   ),
                   Container(height: 50),
                   GestureDetector(
+                    onTap: () async {
+                      await alertNearby();
+                    },
                     child: Container(
                       height: 300,
                       width: 300,
