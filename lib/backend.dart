@@ -1,7 +1,11 @@
+import 'dart:ui';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:geocoder/geocoder.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:jiffy/jiffy.dart';
 
 class Backend {
   var city = '';
@@ -28,7 +32,7 @@ class Backend {
     return ([position.latitude, position.longitude, first.locality, street]);
   }
 
-  getLiveAlerts(city) async {
+  getLiveAlerts(city, context) async {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
 
     print("GEtting live alerts");
@@ -40,7 +44,7 @@ class Backend {
 
     // ~1 mile of lat and lon in degrees
     //var lat = 0.0144927536231884;
-   //var lon = 0.0181818181818182;
+    //var lon = 0.0181818181818182;
 
     //var lowerLat = latitude - (lat * 3);
     //var lowerLon = longitude - (lon * 3);
@@ -70,8 +74,82 @@ class Backend {
 
         var description = data['description'];
 
-      
-
+        showDialog(
+          barrierColor: Colors.transparent,
+          context: context,
+          builder: (_) => Material(
+            type: MaterialType.transparency,
+            child: Center(
+              child: Stack(
+                children: [
+                  Align(
+                    alignment: Alignment.center,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 30),
+                      child: ClipRect(
+                        child: new BackdropFilter(
+                            filter: ImageFilter.blur(
+                                sigmaX: 10.0, sigmaY: 10.0),
+                            child: new Container(
+                              height: 200.0,
+                              decoration: new BoxDecoration(
+                                  color: Colors.black.withOpacity(0.5),
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: Center(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Text(
+                                        "New incident reported",
+                                        style: TextStyle(fontSize: 24),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Text(
+                                        "Time: " + Jiffy(DateTime(reportTime)).fromNow() + "\n" + description,
+                                        style: TextStyle(fontSize: 18),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            )),
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 170, right: 20),
+                      child: Container(
+                        height: 50,
+                        width: 50,
+                        child: Center(
+                          child: Text("⚠️",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.w700)),
+                        ),
+                        decoration: BoxDecoration(
+                            color: Colors.red,
+                            borderRadius: BorderRadius.circular(10)),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
       });
     });
   }

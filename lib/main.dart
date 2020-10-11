@@ -112,7 +112,7 @@ class _HomePageState extends State<HomePage> {
 
     getLivePoints(location[2]);
 
-    backendInstance.getLiveAlerts(location[2]);
+    backendInstance.getLiveAlerts(location[2], context);
   }
 
   bool extendo = false;
@@ -174,86 +174,7 @@ class _HomePageState extends State<HomePage> {
                                   //  MaterialPageRoute(
                                   //      builder: (context) => PoliceView()),
                                   //);
-                                  showDialog(
-                                    barrierColor: Colors.transparent,
-                                    context: context,
-                                    builder: (_) => Material(
-                                      type: MaterialType.transparency,
-                                      child: Center(
-                                        child: Stack(
-                                          children: [
-                                            Align(
-                                              alignment: Alignment.center,
-                                              child: Padding(
-                                                padding: const EdgeInsets.symmetric(
-                                                    horizontal: 30),
-                                                child: ClipRect(
-                                                  child: new BackdropFilter(
-                                                      filter: new ImageFilter.blur(
-                                                          sigmaX: 10.0, sigmaY: 10.0),
-                                                      child: new Container(
-                                                        height: 200.0,
-                                                        decoration: new BoxDecoration(
-                                                            color: Colors.black
-                                                                .withOpacity(0.5),
-                                                            borderRadius:
-                                                                BorderRadius.circular(
-                                                                    20)),
-                                                        child: Padding(
-                                                          padding: const EdgeInsets.all(20.0),
-                                                          child: Center(
-                                                            child: Column(
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .start,
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  SizedBox(height: 10,),
-                                                                  Text("Title",style: TextStyle(
-                                                                  fontSize: 24
-                                                                ),),
-                                                                SizedBox(height: 10,),
-                                                                  Text("fwahfoh faowihf aoiwfhioah wfoiawh foiawhfwoi ",style: TextStyle(
-                                                                  fontSize: 18
-                                                                ),)],
-                                                              
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      )),
-                                                ),
-                                              ),
-                                            ),
-                                            Align(
-                                              alignment: Alignment.centerRight,
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(bottom: 170,right: 20),
-                                                child: Container(
-                                          height: 50,
-                                          width: 50,
-                                          child: Center(
-                                                child: Text(
-                                                    "⚠️",
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 22,
-                                                        fontWeight:
-                                                            FontWeight.w700)),
-                                          ),
-                                          decoration: BoxDecoration(
-                                                  color: Colors.red,
-                                                  borderRadius:
-                                                      BorderRadius.circular(10)),
-                                        ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  );
+
                                 },
                                 child: Container(
                                   width:
