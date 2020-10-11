@@ -1,10 +1,9 @@
 import 'dart:ui';
 
-import 'package:audioplayer/audioplayer.dart';
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:geocoder/geocoder.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:jiffy/jiffy.dart';
 
@@ -60,13 +59,23 @@ class Backend {
     var reference =
         firestore.collection('Cities').doc(city).collection("Alerts");
 
+    AssetsAudioPlayer _assetsAudioPlayer;
+
     reference.snapshots().listen((querySnapshot) {
       querySnapshot.docChanges.forEach((point) async {
         print("NEW POLICE ALERT" + point.doc.data().toString());
 
-        AudioPlayer audioPlugin = AudioPlayer();
 
-        audioPlugin.play('https://gofile.io/d/nYqqg4');
+           _assetsAudioPlayer = AssetsAudioPlayer();
+          _assetsAudioPlayer.open(
+            AssetsAudio(
+              asset: "ring.mp3",
+              folder: "assets/",
+            ),
+          );
+
+         _assetsAudioPlayer.playOrPause();
+
 
         var data = point.doc.data();
 
