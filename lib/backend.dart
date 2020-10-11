@@ -28,13 +28,35 @@ class Backend {
 
     var street = location.substring(0, location.indexOf(','));
 
-    return ([
-      position.latitude,
-      position.longitude,
-      first.locality,
-      street
-    ]);
+    return ([position.latitude, position.longitude, first.locality, street]);
   }
 
-  getRecentReports(city) async {}
+  getLiveAlerts(city) async {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+    var reference = firestore
+        .collection('Cities')
+        .doc(city)
+        .collection("Reports")
+        .where("active", isEqualTo: true);
+    reference.snapshots().listen((querySnapshot) {
+      querySnapshot.docChanges.forEach((point) {
+        print(point.doc.data());
+
+        var data = point.doc.data();
+
+        var long = data['longitude'];
+
+        var lat = data['latitude'];
+
+        var reportTime = data['time'];
+
+        var id = point.doc.id;
+
+        var description = data['description'];
+
+        
+      });
+    });
+  }
 }

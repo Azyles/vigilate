@@ -80,8 +80,9 @@ class _HomePageState extends State<HomePage> {
         icon: BitmapDescriptor.defaultMarker,
         markerId: MarkerId(id),
         position: LatLng(long, lat),
-        infoWindow:
-            InfoWindow(title: "Gun violence reported", snippet:  Jiffy(time.toDate()).fromNow()),
+        infoWindow: InfoWindow(
+            title: "Gun violence reported",
+            snippet: Jiffy(time.toDate()).fromNow()),
       );
       markers[MarkerId(id)] =
           marker; // What I do here is modify the only marker in the Map.
@@ -109,10 +110,12 @@ class _HomePageState extends State<HomePage> {
     controller.animateCamera(CameraUpdate.newCameraPosition(_default));
 
     getLivePoints(location[2]);
+
+    backendInstance.getLiveAlerts(location[2]);
   }
 
   bool extendo = false;
-  
+
   bool police = true;
   @override
   void initState() {
@@ -151,19 +154,18 @@ class _HomePageState extends State<HomePage> {
                   child: new BackdropFilter(
                     filter: new ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
                     child: new Container(
-                        width: MediaQuery.of(context).size.width*0.9,
+                        width: MediaQuery.of(context).size.width * 0.9,
                         height: 70.0,
-                        decoration:
-                            new BoxDecoration(color: Colors.black.withOpacity(0.5),
-                            borderRadius: BorderRadius.circular(10)
-                            ),
+                        decoration: new BoxDecoration(
+                            color: Colors.black.withOpacity(0.5),
+                            borderRadius: BorderRadius.circular(10)),
                         child: Center(
                           child: new Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Center(
-                                  child: GestureDetector(
+                                child: GestureDetector(
                                     onTap: () {
                                       Navigator.push(
                                         context,
@@ -172,65 +174,67 @@ class _HomePageState extends State<HomePage> {
                                       );
                                     },
                                     child: GestureDetector(
-                                       onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => PoliceView()),
-                                      );
-                                    },
-                                      child:  Container(
-                                      width:
-                                          MediaQuery.of(context).size.width * 0.4,
-                                      height: 40,
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
-                                          color: Colors.redAccent[400]),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Center(
-                                          child: Text(
-                                            "PANIC",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 20),
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  PoliceView()),
+                                        );
+                                      },
+                                      child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.4,
+                                        height: 40,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            color: Colors.redAccent[400]),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Center(
+                                            child: Text(
+                                              "PANIC",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20),
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                    )
-                                  ),
-                                ),
-                                Center(
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => PoliceView()),
-                                      );
-                                    },
-                                    child: Container(
-                                      width:
-                                          MediaQuery.of(context).size.width * 0.4,
-                                      height: 40,
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
-                                          color: Colors.deepOrange[400]),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Center(
-                                          child: Text(
-                                            "Dismiss",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 20),
-                                          ),
+                                    )),
+                              ),
+                              Center(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => PoliceView()),
+                                    );
+                                  },
+                                  child: Container(
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.4,
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: Colors.deepOrange[400]),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Center(
+                                        child: Text(
+                                          "Dismiss",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20),
                                         ),
                                       ),
                                     ),
                                   ),
                                 ),
+                              ),
                             ],
                           ),
                         )),
@@ -243,8 +247,11 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
-
-        child: Icon(Icons.keyboard_arrow_up,color: Colors.white,size: 40,),
+        child: Icon(
+          Icons.keyboard_arrow_up,
+          color: Colors.white,
+          size: 40,
+        ),
         onPressed: () {
           showModalBottomSheet<void>(
             barrierColor: Colors.transparent,
@@ -359,7 +366,6 @@ class _HomePageState extends State<HomePage> {
             },
           );
         },
-        
         backgroundColor: Colors.deepOrangeAccent,
         isExtended: extendo,
       ),
