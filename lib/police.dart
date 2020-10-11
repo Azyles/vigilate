@@ -22,11 +22,13 @@ class _PoliceViewState extends State<PoliceView> {
 
     var location = await backendInstance.getCurrentLocation();
 
+    var id = new DateTime.now().toString();
+
     firestore
         .collection("Cities")
         .doc(location[2])
         .collection("Alerts")
-        .doc()
+        .doc(id)
         .set({
       "longitude": location[0],
       "latitude": location[1],
@@ -35,7 +37,6 @@ class _PoliceViewState extends State<PoliceView> {
       "location": GeoPoint(location[0], location[1]),
       "time": new DateTime.now()
     }).then((value) {
-
       Timer _timer;
 
       _timer = new Timer(const Duration(milliseconds: 1000), () {
@@ -43,7 +44,7 @@ class _PoliceViewState extends State<PoliceView> {
             .collection("Cities")
             .doc(location[2])
             .collection("Alerts")
-            .doc()
+            .doc(id)
             .delete()
             .then((value) {
           Navigator.push(
