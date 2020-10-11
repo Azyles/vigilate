@@ -169,11 +169,10 @@ class _HomePageState extends State<HomePage> {
                               Center(
                                   child: GestureDetector(
                                 onTap: () {
-                                  //Navigator.push(
-                                  //  context,
-                                  //  MaterialPageRoute(
-                                  //      builder: (context) => PoliceView()),
-                                  //);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                       builder: (context) => PoliceView()));
 
                                 },
                                 child: Container(
