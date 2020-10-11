@@ -58,8 +58,9 @@ class Backend {
         firestore.collection('Cities').doc(city).collection("Reports");
 
     reference.snapshots().listen((querySnapshot) {
+      print(querySnapshot);
       querySnapshot.docChanges.forEach((point) {
-        print("NEW POLICE ALERT" + point.doc.data().toString());
+        //print("NEW POLICE ALERT" + point.doc.data().toString());
 
         var data = point.doc.data();
 

@@ -55,6 +55,7 @@ class _HomePageState extends State<HomePage> {
         .doc(city)
         .collection("Reports")
         .where("active", isEqualTo: true);
+        
     reference.snapshots().listen((querySnapshot) {
       querySnapshot.docChanges.forEach((point) {
         print(point.doc.data());
