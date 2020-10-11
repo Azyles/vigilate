@@ -64,13 +64,13 @@ class Backend {
 
         var data = point.doc.data();
 
-        var long = data['longitude'];
+        //var long = data['longitude'];
 
-        var lat = data['latitude'];
+        //var lat = data['latitude'];
 
-        var reportTime = data['time'];
+        var reportTime = data['time'].toDate();
 
-        var id = point.doc.id;
+        //var id = point.doc.id;
 
         var description = data['description'];
 
@@ -114,7 +114,7 @@ class Backend {
                                         height: 10,
                                       ),
                                       Text(
-                                        "Time: " + Jiffy(DateTime(reportTime)).fromNow() + "\n" + description,
+                                        "Time: " + Jiffy(reportTime).fromNow() + "\n" + "Description: " + description,
                                         style: TextStyle(fontSize: 18),
                                       )
                                     ],
