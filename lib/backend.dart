@@ -7,6 +7,7 @@ import 'package:geocoder/geocoder.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter/material.dart';
 import 'package:jiffy/jiffy.dart';
+import 'package:torch/torch.dart';
 
 class Backend {
   var city = '';
@@ -74,12 +75,6 @@ class Backend {
 
         _assetsAudioPlayer.playOrPause();
 
-        bool hasFlash = await Flashlight.hasFlashlight;
-
-        if(hasFlash){
-          Flashlight.lightOn();
-        }
-
         
 
         var data = point.doc.data();
@@ -93,6 +88,8 @@ class Backend {
         //var id = point.doc.id;
 
         var description = data['description'];
+
+        Torch.turnOn();
 
         showDialog(
           barrierColor: Colors.transparent,
@@ -175,9 +172,7 @@ class Backend {
           ),
         ).then((exit) => {
               if (exit){
-                if(hasFlash){
-                  Flashlight.lightOff()
-                    }
+                
                 
                 }
               else
