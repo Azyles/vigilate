@@ -33,6 +33,7 @@ dependencies:
   location: ^2.3.5
   flutter_polyline_points: ^0.1.0
   geocoder: ^0.2.1
+  flashlight: ^0.1.1
 
   geolocator: '^5.1.1'
   cloud_firestore: ^0.14.1+3

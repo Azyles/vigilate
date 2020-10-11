@@ -2,11 +2,11 @@ import 'dart:ui';
 
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flashlight/flashlight.dart';
 import 'package:geocoder/geocoder.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter/material.dart';
 import 'package:jiffy/jiffy.dart';
-
 
 class Backend {
   var city = '';
@@ -65,16 +65,22 @@ class Backend {
       querySnapshot.docChanges.forEach((point) async {
         print("NEW POLICE ALERT" + point.doc.data().toString());
 
+        _assetsAudioPlayer = AssetsAudioPlayer();
+        _assetsAudioPlayer.open(
+          Audio("lib/assets/ring.mp3"),
+          autoStart: true,
+          showNotification: false,
+        );
 
-           _assetsAudioPlayer = AssetsAudioPlayer();
-          _assetsAudioPlayer.open(
-            Audio("lib/assets/ring.mp3"),
-            autoStart: true,
-            showNotification: false,
-          );
+        _assetsAudioPlayer.playOrPause();
 
-         _assetsAudioPlayer.playOrPause();
+        bool hasFlash = await Flashlight.hasFlashlight;
 
+        if(hasFlash){
+          Flashlight.lightOn();
+        }
+
+        
 
         var data = point.doc.data();
 
@@ -102,8 +108,8 @@ class Backend {
                       padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: ClipRect(
                         child: new BackdropFilter(
-                            filter: ImageFilter.blur(
-                                sigmaX: 10.0, sigmaY: 10.0),
+                            filter:
+                                ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
                             child: new Container(
                               height: 200.0,
                               decoration: new BoxDecoration(
@@ -128,7 +134,11 @@ class Backend {
                                         height: 10,
                                       ),
                                       Text(
-                                        "Time: " + Jiffy(reportTime).fromNow() + "\n" + "Description: " + description,
+                                        "Time: " +
+                                            Jiffy(reportTime).fromNow() +
+                                            "\n" +
+                                            "Description: " +
+                                            description,
                                         style: TextStyle(fontSize: 18),
                                       )
                                     ],
@@ -163,7 +173,18 @@ class Backend {
               ),
             ),
           ),
-        );
+        ).then((exit) => {
+              if (exit){
+                if(hasFlash){
+                  Flashlight.lightOff()
+                    }
+                
+                }
+              else
+                {
+                  // user pressed No button
+                }
+            });
       });
     });
   }
