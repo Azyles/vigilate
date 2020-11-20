@@ -1,4 +1,4 @@
 # vigilate
 
-Report crime!
+Vigilate allows you to report any suspicious activity going on in the area. This activity is then plotted on the map allowing others to see what suspicious activity is going on and where. If activity in one are starts rising, the government official version of the app is alerted, allowing police officers to arrive at the area. If the officer chooses to alarm everyone at that location, they press the alert button, this alerts everyone at that same location by chiming their phone and sending them a notification. If the situation is in dire need of everyone attention, then the officer can choose to alarm everyone's phones with a loud recognizable sound. They are also prompted with instruction on what steps to take to safely get around whatever the threatening situation may be. Now you may be thinking, why not just simply call the police?
 
